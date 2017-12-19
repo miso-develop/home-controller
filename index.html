@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta content="#444444" name="theme-color">
+<title>Home Controller</title>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="manifest" href="/manifest.json">
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	
+	font-size: 16px;
+	font-family: "Meiryo UI";
+	color: #444;
+}
+
+button {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	outline: none;
+}
+
+#main {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+#tabs {
+	background-color: #ddd;
+	display: flex;
+	align-items: flex-end;
+	overflow: auto;
+	position: fixed;
+	width: 100%;
+	padding: 0 0.25rem;
+	z-index: 1;
+}
+
+.tab-box {
+	min-width: 6rem;
+	display:flex;
+	align-items: flex-start;
+}
+
+.tab {
+	padding: 0.5rem 0;
+	color: #eee;
+	background-color: #444;
+	width: 100%;
+}
+.tab:active {
+	padding: 0.4rem 0;
+	position: absolute;
+	width: 5.5em;
+}
+.tab-selected {
+	font-weight: bold;
+	color: #444;
+	background-color: #fb8;
+}
+
+#buttons {
+	margin: 1rem 0.5rem;
+}
+
+.button-group {
+	display: none;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.button-group-selected {
+	display: flex;
+}
+	
+.button-box {
+	width: 33.3%;
+	padding: 1rem 0.5rem 0;
+}
+
+.button {
+	padding: 1rem 0;
+	border: solid 0.15rem #444;
+	border-radius: 0.25em;
+	font-weight: bold;
+	background-color: #f8f8f8;
+	border-bottom: solid 0.25rem #444;
+	width: 100%;
+}
+.button:active {
+	margin-top: 0.10rem;
+	border-bottom: solid 0.15rem #444;
+}
+
+.text-box {
+	width: 100%;
+	padding: 1rem 0.5rem 0;
+	position: relative;
+}
+.text-box input[type=text] {
+	padding: 1rem;
+	border: solid 0.15rem #444;
+	border-bottom: solid 0.25rem #444;
+	border-radius: 0.25em 0 0 0.25em;
+	width: 80%;
+}
+.text-box .button {
+	width: 20%;
+	border-left: none;
+	border-radius: 0 0.25em 0.25em 0;
+}
+.text-box .button:active {
+	margin-top: 0;
+	position: relative;
+	top: 0.10rem;
+}
+
+
+/* PC */
+@media screen and (min-width: 36.1em) {
+	
+	* {
+		font-size: 20px;
+	}
+	
+	#tabs {
+		justify-content: center;
+	}
+	
+	#buttons {
+		max-width: 24em;
+		width: 100%;
+		margin: 1rem auto;
+	}
+	
+}
+
+
+
+/* tabs top */
+#main.tab-top #tabs {
+	top: 0;
+	bottom: inherit;
+	border: none;
+	border-bottom: solid 0.25rem #444;
+}
+#main.tab-top .tab-box {
+	padding: 1.5rem 0.25rem 0;
+}
+#main.tab-top .tab {
+	border: solid 0.25rem #444;
+	border-bottom: none;
+	border-radius: 0.5em 0.5em 0 0;
+}
+#main.tab-top .tab:active {
+	top: inherit;
+	bottom: 0;
+}
+#main.tab-top #buttons {
+	margin-top: 5rem;
+	margin-bottom: 1rem;
+}
+
+
+
+/* tabs bottom */
+#main.tab-bottom #tabs {
+	top: inherit;
+	bottom: 0;
+	border: none;
+	border-top: solid 0.25rem #444;
+}
+#main.tab-bottom .tab-box {
+	padding: 0 0.25rem 1.5rem;
+}
+#main.tab-bottom .tab {
+	border: solid 0.25rem #444;
+	border-top: none;
+	border-radius: 0 0 0.5em 0.5em;
+}
+#main.tab-bottom .tab:active {
+	top: 0;
+	bottom: inherit;
+}
+#main.tab-bottom #buttons {
+	margin-top: 1rem;
+	margin-bottom: 5rem;
+}
+
+
+
+/*toast*/
+#toast {
+	position: fixed;
+	top: 80%;
+	left: 0;
+	right: 0;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+#toast div {
+	padding: 0.5rem 1rem;
+	border: solid 0.125rem #fb8;
+	border-radius: 0.25em;
+	background-color: #fec;
+}
+
+</style>
+<script defer src="/__/firebase/4.8.0/firebase-app.js"></script>
+<script defer src="/__/firebase/4.8.0/firebase-database.js"></script>
+<script defer src="/__/firebase/init.js"></script>
+<script defer src="data.js"></script>
+<script defer src="main.js"></script>
+</head>
+<body>
+<div id="main" class="tab-bottom">
+	<div id="tabs"></div>
+	<div id="buttons"></div>
+	<div id="toast"></div>
+</div>
+</body>
+</html>
