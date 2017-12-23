@@ -128,7 +128,6 @@ const fadein = (elem, fadeTime) => {
 			current = fadeTime
 		}
 		elem.style.opacity = current / fadeTime
-		elem.style.zIndex = 0
 	}, 10);
 }
 // fadeout
@@ -153,8 +152,13 @@ const toast = message => {
 	toastMessage.innerHTML = message
 	toast.innerHTML = ""
 	toast.appendChild(toastMessage)
+	toast.style.width = message.length + 2 + "rem"
+	// fade
 	fadein(toastMessage, 250)
-	setTimeout(() => fadeout(toastMessage, 500), 1500)
+	setTimeout(() => {
+		fadeout(toastMessage, 500)
+		setTimeout(()=> toast.removeChild(toastMessage), 500)
+	}, 1500)
 }
 
 
