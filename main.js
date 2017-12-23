@@ -152,12 +152,12 @@ const toast = message => {
 	toastMessage.innerHTML = message
 	toast.innerHTML = ""
 	toast.appendChild(toastMessage)
-	toast.style.width = message.length + 2 + "rem"
+	toast.style.width = message.length + 2.25 + "rem"
 	// fade
 	fadein(toastMessage, 250)
 	setTimeout(() => {
 		fadeout(toastMessage, 500)
-		setTimeout(()=> toast.removeChild(toastMessage), 500)
+		setTimeout(()=> {try {toast.removeChild(toastMessage)} catch(e) {}}, 500)
 	}, 1500)
 }
 
